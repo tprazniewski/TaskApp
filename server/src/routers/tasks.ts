@@ -8,8 +8,9 @@ router.get("/", async (req, res) => {
   const result = await taskController.getAll();
   res.status(200).send(result);
 });
-router.get("/:id", (req, res) => {});
 router.post("/", (req, res) => {});
+
+router.get("/:id", (req, res) => {});
 router.delete("/:id", (req, res) => {});
 router.patch("/:id", (req, res) => {});
 
