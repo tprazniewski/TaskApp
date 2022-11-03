@@ -8,7 +8,7 @@ router.get("/", async (req, res) => {
   const result = await taskController.getAll();
   res.status(200).send(result);
 });
-router.post("/", (req, res) => {});
+router.post("/", async (req, res) => {});
 
 router.get("/:id", (req, res) => {});
 router.delete("/:id", (req, res) => {});
