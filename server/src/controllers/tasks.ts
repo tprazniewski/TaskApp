@@ -1,8 +1,9 @@
 import { appDataSource } from "../db/mysql";
 import { Task } from "../entities/Task";
-import { instanceToPlain } from "class-transformer";
+import { instanceToPlain, plainToInstance } from "class-transformer";
 import { Request, Response } from "express";
 import { validationResult } from "express-validator";
+import { UpdateResult } from "typeorm";
 
 class TaskController {
   //   public async getAll(): Promise<Task[]> {
@@ -39,6 +40,35 @@ class TaskController {
       return res.status(400).send({ error: " internal server errro" });
     }
   }
-}
+  // @ts-ignore
+  public async update(req: Request, res: Response): Promise<Response> {
+    const { id, status } = req.body;
 
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) return res.status(400).send(errors.array());
+
+    let task: Task | null;
+
+    try {
+      task = await appDataSource.getRepository(Task).findOne({ where: { id } });
+    } catch (error) {
+      return res.status(500).send({ error: "internal server error" });
+      // or user not found
+    }
+    if (!task) {
+      return res.status(404).send({ message: "user not found" });
+    }
+    let updateTask: UpdateResult;
+
+    try {
+      updateTask = await appDataSource
+        .getRepository(Task)
+        .update(id, plainToInstance(Task, { status }));
+      updateTask = instanceToPlain(updateTask) as UpdateResult;
+      return res.status(204).send(updateTask);
+    } catch (err) {
+      return res.status(500).send({ err: "Internal server error" });
+    }
+  }
+}
 export const taskController = new TaskController();
