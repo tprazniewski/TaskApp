@@ -10,7 +10,7 @@ const PORT = process.env.PORT || 666;
 const app = express();
 //use Body Parser
 app.use(bodyParser.json());
-
+app.use("/tasks", taskRoutes);
 appDataSource
   .initialize()
   .then(() =>
