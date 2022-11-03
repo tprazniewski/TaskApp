@@ -30,7 +30,7 @@ export const createValidator: ValidationChain[] = [
     .withMessage("Status can only be todo,inProgress or completed"),
 ];
 
-export const updateValidator: ValidationChain[] = [
+export const updateStatusValidator: ValidationChain[] = [
   body("id").not().isEmpty().withMessage("The ID field is mandatory"),
   body("status")
     .trim()
