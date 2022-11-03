@@ -12,8 +12,6 @@ router.post("/", createValidator, taskController.create);
 
 router.put("/", updateStatusValidator, taskController.update);
 
-router.get("/:id", (req, res) => {});
-router.delete("/:id", (req, res) => {});
-router.patch("/:id", (req, res) => {});
+router.delete("/", taskController.delete);
 
 export default router;

@@ -22,3 +22,8 @@ Content-Type: application/json
     "id": "1",
     "status": "todoo"
 }
+DELETE http://localhost:999/tasks
+Content-Type: application/json
+{
+    "id": "11"
+}

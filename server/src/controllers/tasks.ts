@@ -3,7 +3,7 @@ import { Task } from "../entities/Task";
 import { instanceToPlain, plainToInstance } from "class-transformer";
 import { Request, Response } from "express";
 import { validationResult } from "express-validator";
-import { UpdateResult } from "typeorm";
+import { UpdateResult, DeleteResult } from "typeorm";
 
 class TaskController {
   //   public async getAll(): Promise<Task[]> {
@@ -66,6 +66,30 @@ class TaskController {
         .update(id, plainToInstance(Task, { status }));
       updateTask = instanceToPlain(updateTask) as UpdateResult;
       return res.status(204).send(updateTask);
+    } catch (err) {
+      return res.status(500).send({ err: "Internal server error" });
+    }
+  }
+
+  public async delete(req: Request, res: Response) {
+    const { id } = req.body;
+    let task: Task | null;
+    try {
+      task = await appDataSource.getRepository(Task).findOne({ where: { id } });
+    } catch (error) {
+      return res.status(500).send({ error: "internal server error" });
+      // or user not found
+    }
+    if (!task) {
+      return res.status(404).send({ message: "user not found" });
+    }
+    let deleteTask: DeleteResult;
+
+    try {
+      deleteTask = await appDataSource.getRepository(Task).delete(id);
+      deleteTask = instanceToPlain(deleteTask) as UpdateResult;
+
+      return res.status(202).send(instanceToPlain(task));
     } catch (err) {
       return res.status(500).send({ err: "Internal server error" });
     }
