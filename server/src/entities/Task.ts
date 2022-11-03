@@ -34,8 +34,18 @@ export class Task extends BaseEntity {
   })
   description: string;
 
+  @Column({
+    type: "enum",
+    enum: Proprity,
+    default: Proprity.normal,
+  })
   priority: Proprity;
 
+  @Column({
+    type: "enum",
+    enum: Status,
+    default: Status.todo,
+  })
   status: Status;
 
   @CreateDateColumn()
