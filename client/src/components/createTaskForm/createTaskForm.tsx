@@ -2,6 +2,7 @@ import React, { FC, ReactElement } from "react";
 import { Box, Typography, Stack } from "@mui/material";
 import { TitleField } from "./task/TitleField";
 import { DescriptionField } from "./description/DescriptionField";
+import { DataField } from "./date/DateField";
 
 export const CreateTaskForm: FC = (): ReactElement => {
   return (
@@ -19,6 +20,7 @@ export const CreateTaskForm: FC = (): ReactElement => {
       <Stack sx={{ width: "100%" }} spacing={2}>
         <TitleField />
         <DescriptionField />
+        <DataField />
       </Stack>
       {/* title */}
       {/* description */}
