@@ -8,6 +8,7 @@ import {
 } from "@mui/material";
 
 import { ISelect } from "../interfaces/ISelect";
+import PropTypes from "prop-types";
 
 export const SelectField: FC<ISelect> = (props): ReactElement => {
   const {
@@ -43,4 +44,17 @@ export const SelectField: FC<ISelect> = (props): ReactElement => {
       </Select>
     </FormControl>
   );
+};
+
+SelectField.propTypes = {
+  onChange: PropTypes.func,
+  label: PropTypes.string,
+  name: PropTypes.string,
+  disabled: PropTypes.bool,
+  items: PropTypes.arrayOf(
+    PropTypes.shape({
+      value: PropTypes.string.isRequired,
+      label: PropTypes.string.isRequired,
+    }).isRequired
+  ),
 };
