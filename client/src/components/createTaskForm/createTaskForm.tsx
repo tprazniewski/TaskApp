@@ -26,13 +26,17 @@ export const CreateTaskForm: FC = (): ReactElement => {
         Create Task Form!
       </Typography>
       <Stack sx={{ width: "100%" }} spacing={2}>
-        <TitleField />
-        <DescriptionField />
-        <DataField />
+        <TitleField onChange={(e) => setTitle(e.target.value)} />
+        <DescriptionField onChange={(e) => setDescription(e.target.value)} />
+        <DataField value={date} onChange={(date) => setDate(date)} />
         <Stack sx={{ width: "100%" }} direction="row" spacing={2}>
           <SelectField
             label="Status"
             name="status"
+            value={status}
+            onChange={(e) => {
+              setStatus(e.target.value);
+            }}
             items={[
               { value: Status.todo, label: Status.todo.toLocaleUpperCase() },
               {
@@ -48,6 +52,10 @@ export const CreateTaskForm: FC = (): ReactElement => {
           <SelectField
             label="Priority"
             name="priority"
+            value={priority}
+            onChange={(e) => {
+              setPriority(e.target.value);
+            }}
             items={[
               { value: Priority.low, label: Priority.low.toLocaleUpperCase() },
               {
