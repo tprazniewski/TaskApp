@@ -1,11 +1,22 @@
 import React, { FC, ReactElement, useState } from "react";
-import { Box, Typography, Stack } from "@mui/material";
+import {
+  Box,
+  Typography,
+  Stack,
+  LinearProgress,
+  Button,
+  Alert,
+  AlertTitle,
+} from "@mui/material";
 import { TitleField } from "./task/TitleField";
 import { DescriptionField } from "./description/DescriptionField";
 import { DataField } from "./date/DateField";
 import { SelectField } from "./select/Select.Field";
 import { Status } from "./enums/Status";
 import { Priority } from "./enums/Priority";
+import { sendApiRequest } from "../../helpers/api";
+import { useMutation } from "@tanstack/react-query";
+import { ICreateTask } from "../taskarea/interfaces/ICreateTask";
 
 export const CreateTaskForm: FC = (): ReactElement => {
   const [title, setTitle] = useState<string | undefined>(undefined);
@@ -13,6 +24,26 @@ export const CreateTaskForm: FC = (): ReactElement => {
   const [date, setDate] = useState<Date | null>(new Date());
   const [status, setStatus] = useState<string>(Status.todo);
   const [priority, setPriority] = useState<string>(Priority.normal);
+
+  const createTaskMutation = useMutation((data: ICreateTask) =>
+    sendApiRequest("http://localhost:999/tasks", "POST", data)
+  );
+
+  const createTaskHandler = () => {
+    console.log("title:", title, " descripion:", description, " date:", date);
+    if (!title || !description || !date) {
+      return;
+    }
+    const task: ICreateTask = {
+      title,
+      description,
+      date: date.toString(),
+      status,
+      priority,
+    };
+    console.log("task", task);
+    createTaskMutation.mutate(task);
+  };
   return (
     <Box
       display="flex"
@@ -22,6 +53,16 @@ export const CreateTaskForm: FC = (): ReactElement => {
       px={4}
       my={6}
     >
+      <Alert
+        severity="success"
+        sx={{
+          width: "100%",
+          marginBottom: "16px",
+        }}
+      >
+        <AlertTitle>Success</AlertTitle>
+        The task ahs been addedd successfully!
+      </Alert>
       <Typography mb={2} component="h2" variant="h6">
         Create Task Form!
       </Typography>
@@ -69,12 +110,17 @@ export const CreateTaskForm: FC = (): ReactElement => {
             ]}
           />
         </Stack>
+        <LinearProgress />
+        <Button
+          variant="contained"
+          size="medium"
+          fullWidth
+          onClick={createTaskHandler}
+        >
+          {" "}
+          Create A task{" "}
+        </Button>
       </Stack>
-      {/* title */}
-      {/* description */}
-      {/* due Date */}
-      {/* status */}
-      {/* priority */}
     </Box>
   );
 };

@@ -32,7 +32,9 @@ class TaskController {
     // @ts-ignore
     newTask = { title, date, description, priority, status };
     let createTask: Task;
+    console.log("weszlo");
     try {
+      console.log("task", newTask);
       createTask = await appDataSource.getRepository(Task).save(newTask);
       createTask = instanceToPlain(createTask) as Task;
       return res.status(201).send(createTask);

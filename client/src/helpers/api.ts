@@ -5,7 +5,7 @@ function returnCorrectRequest(method: Method, data: unknown): RequestInit {
     return {
       method: method,
       headers: {
-        ContentType: "applicaton/json",
+        "Content-Type": "application/json",
       },
     };
   } else {
@@ -13,7 +13,7 @@ function returnCorrectRequest(method: Method, data: unknown): RequestInit {
       method: method,
       body: JSON.stringify(data),
       headers: {
-        ContentType: "applicaton/json",
+        "Content-Type": "application/json",
       },
     };
   }

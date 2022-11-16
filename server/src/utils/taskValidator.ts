@@ -22,10 +22,12 @@ export const createValidator: ValidationChain[] = [
     .withMessage("Description needs to be in text format"),
   body("priority")
     .trim()
+    .toLowerCase()
     .isIn([Proprity.normal, Proprity.high, Proprity.low])
     .withMessage("Priority can only be normal,high or low"),
   body("status")
     .trim()
+    .toLowerCase()
     .isIn([Status.todo, Status.inProgress, Status.completed])
     .withMessage("Status can only be todo,inProgress or completed"),
 ];

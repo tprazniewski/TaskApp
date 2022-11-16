@@ -10,7 +10,7 @@ POST http://localhost:999/tasks
 Content-Type: application/json
 {
     "title": "First title from Yac",
-    "date": "2022-11-03",
+    "date": "Wed Nov 16 2022 20:40:44 GMT+0100 (Central European Standard Time)",
     "description": "This is a first desc from yac!",
     "priority": "normal",
     "status": "todo"
