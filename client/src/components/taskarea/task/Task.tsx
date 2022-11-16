@@ -2,6 +2,7 @@ import React, { FC, ReactElement } from "react";
 import { Box } from "@mui/material";
 import { Header } from "./header/Header";
 import { Description } from "./description/Description";
+import { Footer } from "./footer/Footer";
 
 export const Task: FC = (): ReactElement => {
   return (
@@ -10,8 +11,8 @@ export const Task: FC = (): ReactElement => {
       flexDirection="column"
       justifyContent="flex-start"
       width="100%"
-      mb={2}
-      p={4}
+      mb={4}
+      p={2}
       sx={{
         width: "100%",
         backgroundColor: "background.paper",
@@ -22,7 +23,7 @@ export const Task: FC = (): ReactElement => {
     >
       <Header />
       <Description />
-      {/* footer */}
+      <Footer />
     </Box>
   );
 };
