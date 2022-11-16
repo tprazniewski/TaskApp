@@ -1,6 +1,7 @@
 import React, { FC, ReactElement } from "react";
 import { Box } from "@mui/material";
 import { Header } from "./header/Header";
+import { Description } from "./description/Description";
 
 export const Task: FC = (): ReactElement => {
   return (
@@ -20,7 +21,7 @@ export const Task: FC = (): ReactElement => {
       }}
     >
       <Header />
-      {/* desc */}
+      <Description />
       {/* footer */}
     </Box>
   );

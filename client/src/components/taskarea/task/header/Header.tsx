@@ -11,7 +11,7 @@ export const Header: FC<IHeader> = (props): ReactElement => {
       display="flex"
       width="100%"
       justifyContent="space-between"
-      mb={4}
+      mb={3}
       //   flexDirection="column"
     >
       <Box>
