@@ -2,7 +2,7 @@ import React, { FC, ReactElement } from "react";
 import { Avatar, Box, Typography } from "@mui/material";
 import { emitBorderColour } from "./helpers/emitBorderColour";
 import { Status } from "../../createTaskForm/enums/Status";
-import { ICounter } from "./ICounter";
+import { ICounter } from "./interfaces/ICounter";
 import { emitLAbel } from "./helpers/emitLabel";
 import PropTypes from "prop-types";
 

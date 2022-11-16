@@ -1,4 +1,4 @@
-import { CounterStatus } from "../ICounter";
+import { CounterStatus } from "../interfaces/ICounter";
 import { Status } from "../../../createTaskForm/enums/Status";
 
 export const emitLAbel = (status: CounterStatus): string => {
