@@ -1,10 +1,20 @@
 import React, { FC, ReactElement } from "react";
-import { Grid, Box } from "@mui/material";
+import { Grid, Box, Alert, LinearProgress } from "@mui/material";
 import { format } from "date-fns";
 import { Counter } from "./counter/Counter";
 import { Task } from "./task/Task";
+import { useQuery } from "@tanstack/react-query";
+import { sendApiRequest } from "../../helpers/api";
+import { ITaskApi } from "./interfaces/ITaskApi";
 
 export const TaskArea: FC = (): ReactElement => {
+  const { error, isLoading, data, refetch } = useQuery(["tasks"], async () => {
+    return await sendApiRequest<ITaskApi[]>(
+      "http://localhost:999/tasks",
+      "GET"
+    );
+  });
+
   return (
     <Grid item md={8} px={4}>
       <Box mb={8} px={4}>
@@ -33,9 +43,33 @@ export const TaskArea: FC = (): ReactElement => {
           md={8}
           xs={10}
         >
-          <Task />
-          <Task />
-          <Task />
+          <>
+            {error && (
+              <Alert severity="error">
+                There was an error fetching your tasks
+              </Alert>
+            )}
+            {!error && Array.isArray(data) && data.length === 0 && (
+              <Alert severity="warning"> you don't have any tasks yet!</Alert>
+            )}
+            {isLoading ? (
+              <LinearProgress />
+            ) : (
+              Array.isArray(data) &&
+              data.length > 0 &&
+              data.map((e, i) => {
+                return (
+                  <Task
+                    key={i + e.priority}
+                    id={e.id}
+                    title={e.title}
+                    date={new Date(e.date)}
+                    priority={e.priority}
+                  />
+                );
+              })
+            )}
+          </>
         </Grid>
       </Grid>
     </Grid>

@@ -5,6 +5,8 @@ import PropTypes from "prop-types";
 
 export const Footer: FC<IFooter> = (props): ReactElement => {
   const {
+    id,
+    status,
     onStatusChange = (e) => console.log(e),
     onClick = (e) => console.log(e),
   } = props;
@@ -34,6 +36,8 @@ export const Footer: FC<IFooter> = (props): ReactElement => {
 };
 
 Footer.propTypes = {
+  id: PropTypes.string.isRequired,
   onStatusChange: PropTypes.func,
   onClick: PropTypes.func,
+  status: PropTypes.string,
 };
