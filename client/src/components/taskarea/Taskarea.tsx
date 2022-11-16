@@ -6,6 +6,7 @@ import { Task } from "./task/Task";
 import { useQuery } from "@tanstack/react-query";
 import { sendApiRequest } from "../../helpers/api";
 import { ITaskApi } from "./interfaces/ITaskApi";
+import { Status } from "../createTaskForm/enums/Status";
 
 export const TaskArea: FC = (): ReactElement => {
   const { error, isLoading, data, refetch } = useQuery(["tasks"], async () => {
@@ -59,13 +60,20 @@ export const TaskArea: FC = (): ReactElement => {
               data.length > 0 &&
               data.map((e, i) => {
                 return (
+                  // e.status == Status.todo ||
+                  // (e.status == Status.inProgress ? (
                   <Task
                     key={i + e.priority}
                     id={e.id}
                     title={e.title}
                     date={new Date(e.date)}
                     priority={e.priority}
+                    status={e.status}
                   />
+                  // ) : (
+                  //   false
+                  // )
+                  // )
                 );
               })
             )}

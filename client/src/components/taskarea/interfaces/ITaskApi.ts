@@ -7,5 +7,5 @@ export interface ITaskApi {
   title: string;
   description: string;
   priority: `${Priority}`;
-  Status: `${Status}`;
+  status: `${Status}`;
 }

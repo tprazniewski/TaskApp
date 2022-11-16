@@ -2,6 +2,7 @@ import React, { FC, ReactElement } from "react";
 import { Box, Switch, Button, FormControlLabel } from "@mui/material";
 import { IFooter } from "../interfaces/IFooter";
 import PropTypes from "prop-types";
+import { Status } from "../../../createTaskForm/enums/Status";
 
 export const Footer: FC<IFooter> = (props): ReactElement => {
   const {
@@ -10,6 +11,7 @@ export const Footer: FC<IFooter> = (props): ReactElement => {
     onStatusChange = (e) => console.log(e),
     onClick = (e) => console.log(e),
   } = props;
+  console.log("status:", status, "!!!! Status form enum:", Status.inProgress);
   return (
     <Box
       display="flex"
@@ -19,7 +21,13 @@ export const Footer: FC<IFooter> = (props): ReactElement => {
     >
       <FormControlLabel
         label="In progress"
-        control={<Switch onChange={(e) => onStatusChange(e)} color="warning" />}
+        control={
+          <Switch
+            defaultChecked={status === Status.inProgress}
+            onChange={(e) => onStatusChange(e)}
+            color="warning"
+          />
+        }
       />
       <Button
         variant="contained"
