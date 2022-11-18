@@ -7,6 +7,8 @@ import { useQuery } from "@tanstack/react-query";
 import { sendApiRequest } from "../../helpers/api";
 import { ITaskApi } from "./interfaces/ITaskApi";
 import { Status } from "../createTaskForm/enums/Status";
+import { useMutation } from "@tanstack/react-query";
+import { IUpdateSwitch } from "../createTaskForm/interfaces/IUpdateSwitch";
 
 export const TaskArea: FC = (): ReactElement => {
   const { error, isLoading, data, refetch } = useQuery(["tasks"], async () => {
@@ -15,6 +17,10 @@ export const TaskArea: FC = (): ReactElement => {
       "GET"
     );
   });
+
+  const updateSwitch = useMutation((data: IUpdateSwitch) =>
+    sendApiRequest("http://localhost:999/tasks", "PUT", data)
+  );
 
   return (
     <Grid item md={8} px={4}>
