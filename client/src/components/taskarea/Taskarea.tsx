@@ -18,8 +18,7 @@ export const TaskArea: FC = (): ReactElement => {
     );
   });
 
-  //updateTaskMutation
-  const updateSwitch = useMutation((data: IUpdateSwitch) =>
+  const updateTaskMutation = useMutation((data: IUpdateSwitch) =>
     sendApiRequest("http://localhost:999/tasks", "PUT", data)
   );
 
@@ -27,9 +26,21 @@ export const TaskArea: FC = (): ReactElement => {
     e: React.ChangeEvent<HTMLInputElement>,
     id: string
   ) {
-    updateSwitch.mutate({
+    updateTaskMutation.mutate({
       id,
       status: e.target.checked ? Status.inProgress : Status.todo,
+    });
+  }
+
+  function onClickHandler(
+    e:
+      | React.MouseEvent<HTMLButtonElement>
+      | React.MouseEvent<HTMLAnchorElement>,
+    id: string
+  ) {
+    updateTaskMutation.mutate({
+      id,
+      status: Status.completed,
     });
   }
 
@@ -87,6 +98,7 @@ export const TaskArea: FC = (): ReactElement => {
                     priority={e.priority}
                     status={e.status}
                     onStatusChange={onStatuschangeHandler}
+                    onClick={onClickHandler}
                   />
                   // ) : (
                   //   false
