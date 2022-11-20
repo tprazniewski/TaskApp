@@ -24,7 +24,7 @@ export const Footer: FC<IFooter> = (props): ReactElement => {
         control={
           <Switch
             defaultChecked={status === Status.inProgress}
-            onChange={(e) => onStatusChange(e)}
+            onChange={(e) => onStatusChange(e, id)}
             color="warning"
           />
         }
@@ -34,7 +34,7 @@ export const Footer: FC<IFooter> = (props): ReactElement => {
         color="success"
         size="small"
         sx={{ color: "#ffffff" }}
-        onClick={(e) => onClick(e)}
+        onClick={(e) => onClick(e, id)}
       >
         {" "}
         Mark completed

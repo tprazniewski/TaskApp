@@ -18,9 +18,20 @@ export const TaskArea: FC = (): ReactElement => {
     );
   });
 
+  //updateTaskMutation
   const updateSwitch = useMutation((data: IUpdateSwitch) =>
     sendApiRequest("http://localhost:999/tasks", "PUT", data)
   );
+
+  function onStatuschangeHandler(
+    e: React.ChangeEvent<HTMLInputElement>,
+    id: string
+  ) {
+    updateSwitch.mutate({
+      id,
+      status: e.target.checked ? Status.inProgress : Status.todo,
+    });
+  }
 
   return (
     <Grid item md={8} px={4}>
@@ -75,6 +86,7 @@ export const TaskArea: FC = (): ReactElement => {
                     date={new Date(e.date)}
                     priority={e.priority}
                     status={e.status}
+                    onStatusChange={onStatuschangeHandler}
                   />
                   // ) : (
                   //   false
