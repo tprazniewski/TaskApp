@@ -58,7 +58,7 @@ export const CreateTaskForm: FC = (): ReactElement => {
       flexDirection="column"
       alignItems="flex-start"
       width="100%"
-      px={4}
+      px={8}
       my={6}
     >
       {showSuccess && (
@@ -77,7 +77,7 @@ export const CreateTaskForm: FC = (): ReactElement => {
       <Typography mb={2} component="h2" variant="h6">
         Create Task Form!
       </Typography>
-      <Stack sx={{ width: "100%" }} spacing={2}>
+      <Stack sx={{ width: "100%" }} spacing={4}>
         <TitleField
           onChange={(e) => setTitle(e.target.value)}
           disabled={createTaskMutation.isLoading}
